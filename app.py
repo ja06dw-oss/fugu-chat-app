@@ -1,7 +1,12 @@
+import os
 from flask import Flask, request, render_template_string
 from openai import OpenAI
 
-API_KEY = "fish_722df7a206f76b067581c87a32a617b95fce3968ba6bddd2825e18bc9441d13f"  # ← 自分のキーに書き換え
+# 環境変数から API キーを取得
+API_KEY = os.environ.get("SAKANA_API_KEY")
+
+if not API_KEY:
+    raise ValueError("SAKANA_API_KEY が設定されていません")
 
 client = OpenAI(
     api_key=API_KEY,
